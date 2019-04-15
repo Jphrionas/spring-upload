@@ -1,6 +1,6 @@
 # Simple Project With Spring Boot and Data JPA
 
-[![Build Status](https://travis-ci.org/Jphrionas/spring-upload.svg?branch=master)](https://travis-ci.org/Jphrionas/spring-upload)
+
 
 ## Create Schema
 ```sh
