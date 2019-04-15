@@ -21,6 +21,7 @@
 				<table class="table table-striped ">
 			<thead>
 				<tr>
+					<th>Id</th>
 					<th>Nome</th>
 					<th>Sobrenome</th>
 					<th>Email</th>
@@ -33,6 +34,7 @@
 			<tbody>
 
 				<tr th:each="cliente: ${clientes}">
+					<td ><a th:href="@{'cliente/' +${cliente.id}}">Ver</a></td>
 					<td th:text="${cliente.nome}"></td>
 					<td th:text="${cliente.sobrenome}"></td>
 					<td th:text="${cliente.email}"></td>

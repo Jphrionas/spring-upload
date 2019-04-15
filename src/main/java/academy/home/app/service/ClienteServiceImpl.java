@@ -31,11 +31,12 @@ public class ClienteServiceImpl implements ClienteService {
 	@Transactional
 	public Cliente save(Cliente cliente) {
 		Cliente find = findByName(cliente.getNome());
-		if(find != null && cliente.getId() == null) {
-			return find;
+		if(find == null) {
+			return this.clienteRepository.save(cliente);
 		}
 		
-		return this.clienteRepository.save(cliente);
+		find.setFoto(cliente.getFoto());
+		return find;
 	}
 
 	@Override

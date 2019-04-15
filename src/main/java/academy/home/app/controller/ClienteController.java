@@ -40,8 +40,18 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@RequestMapping(path="{id}",  method=RequestMethod.GET)
-	public void findById(@PathVariable("id") Long id) {
+	public String findById(@PathVariable("id") Long id, Map<String, Object> model, RedirectAttributes flashScope, SessionStatus status) {
 		
+		Cliente cliente = clienteService.findById(id);
+		if(cliente == null) {
+			flashScope.addFlashAttribute("errorMessage", "Cliente is null");
+			return "redirect:/cliente";
+		}
+		
+		model.put("cliente", cliente);
+		model.put("titulo", "Detalhe do Cliente");
+		status.setComplete();
+		return "view";
 	}
 	
 	@RequestMapping(method= RequestMethod.GET)
