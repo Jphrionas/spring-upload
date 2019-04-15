@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header" ></header>
+	
+	<div class="jumbotron  mb-6">
+		<h1 class="text-secondary" th:text="${titulo}"></h1>
+		<a th:href="@{/cliente/new}" class="btn btn-primary">Novo Cliente</a>
+	</div>
+	
+	<div class="container-fluid">
+	
+		<div class="card">
+			<div class="card-header" th:text="${titulo}"></div>
+			
+			<div class="card-body">
+				<table class="table table-striped ">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Sobrenome</th>
+					<th>Email</th>
+					<th>Data</th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				<tr th:each="cliente: ${clientes}">
+					<td th:text="${cliente.nome}"></td>
+					<td th:text="${cliente.sobrenome}"></td>
+					<td th:text="${cliente.email}"></td>
+					<td th:text="${cliente.createAt}"></td>
+					<td><a th:href="@{cliente/edit/}+${cliente.id}">Editar</a></td>
+					<td><a th:href="@{cliente/delete/}+${cliente.id}" onclick="return confirm('Deseja realmente excluir o cliente? ')">Remover</a></td>
+				</tr>
+			</tbody>
+		</table>
+			
+			<nav th:replace="layout/paginator :: paginator"></nav>
+			</div>
+		</div>
+		
+	</div>
+
+	
+</body>
+</html>
