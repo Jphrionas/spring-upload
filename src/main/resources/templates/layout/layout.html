@@ -4,24 +4,37 @@
 	<meta charset="UTF-8" />
 	<title th:text="${titulo}"></title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	
+	
+	<style>
+		footer {
+		text-align: center;
+		font-size: .9rem;
+		border-top: 1px solid #cecece;
+		padding: 1rem;
+		width: 100%;
+		margin-top: 2rem;	
+		}
+	</style>
+	
 </head>
 
 <body>
 	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-			<a class="navbar-brand" href="#">Navbar</a>
+			<a class="navbar-brand" href="#">Example</a>
 			<div class="navbar-collapse">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/cliente}">Cliente</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Ticket</a></li>
+					
 				</ul>
 			</div>
 		</nav>
 	</header>
 
-
+	<div th:fragment="message">
 	<div th:if="${warningMessage}">
 		<span class="alert block alert-warning" th:text="${warningMessage}"></span>
 	</div>
@@ -42,9 +55,10 @@
 	<div th:if="${infoMessage}">
 		<span class="alert block alert-info" th:text="${infoMessage}"></span>
 	</div>
+	</div>
 	
 	
-	<footer th:fragment="footer"><p>Todos os direitos reservados</p></footer>
+	<footer th:fragment="footer"><p>&copy; JPhrionas. Todos os direitos reservados!</p></footer>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script

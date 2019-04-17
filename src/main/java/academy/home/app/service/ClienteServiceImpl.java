@@ -14,7 +14,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Override
 	@Transactional(readOnly=true)
 	public Iterable<Cliente> findAll() {
@@ -52,10 +52,8 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	@Transactional
-	public void delete(Long id) {
-		Cliente cliente = findById(id);
-		if(cliente != null) {
+	public void delete(Cliente cliente) {
+		if(cliente != null) {			
 			this.clienteRepository.delete(cliente);
 		}
 	}

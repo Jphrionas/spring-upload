@@ -14,13 +14,15 @@
 		<a th:href="@{/cliente/new}" class="btn btn-primary">Novo Cliente</a>
 	</div>
 	
+		<div th:replace="layout/layout :: message"></div>
+	
 	<div class="container py-4">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			
 			<div class="card-body">
 			
-				<img th:if="${#strings.length(cliente.foto) > 0}" th:src="@{'/upload/' +  ${cliente.foto}}" th:alt="${cliente.nome}" class="img-thumbnail float-left" 
+				<img th:if="${#strings.length(cliente.foto) > 0}" th:src="@{'/cliente/uploads/' +  ${cliente.foto}}" th:alt="${cliente.nome}" class="img-thumbnail float-left" 
 					style="width: 25%;"/>
 					
 				<ul class="list-group">
