@@ -25,6 +25,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import academy.home.app.config.properties.MyProperties;
 import academy.home.app.domain.entity.Cliente;
 import academy.home.app.domain.model.Paginator;
 import academy.home.app.service.ClienteService;
@@ -39,6 +40,9 @@ public class ClienteController {
 	@Autowired
 	private ClienteService clienteService;
 	
+	@Autowired
+	private MyProperties myProperties;
+	
 	@RequestMapping(path="{id}",  method=RequestMethod.GET)
 	public String findById(@PathVariable("id") Long id, Map<String, Object> model, RedirectAttributes flashScope, SessionStatus status) {
 		
@@ -47,6 +51,7 @@ public class ClienteController {
 			flashScope.addFlashAttribute("errorMessage", "Cliente is null");
 			return "redirect:/cliente";
 		}
+		
 		
 		model.put("cliente", cliente);
 		model.put("titulo", "Detalhe do Cliente");
@@ -84,14 +89,16 @@ public class ClienteController {
 			return form(new  HashMap<>(), cliente);
 		}
 		
+		
 		// Upload da Imagem
 		if(!file.isEmpty()) {
-			Path path = Paths.get("src/main/resources/static/upload");
-			Path pathToFile = path.resolve(file.getOriginalFilename());
+			String path = this.myProperties.getUpload().getAbsolutePath();
+			
+			Path pathComplete = Paths.get(path).resolve(file.getOriginalFilename());
 			
 			try {
 				byte[] bytes = file.getBytes();
-				Files.write(pathToFile, bytes);
+				Files.write(pathComplete, bytes);
 				
 				redirect.addFlashAttribute("infoMessage", "Imagem Enviada com sucesso!");
 				
@@ -101,8 +108,7 @@ public class ClienteController {
 			}
 		}
 		
-		
-		
+
 		clienteService.save(cliente);
 		
 		redirect.addFlashAttribute("successMessage", String.format("Cliente %s foi salvo com sucesso!", cliente.getNome()));
